@@ -1,0 +1,469 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Public-safe competitive solo player profile and lifetime career statistics.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "ign": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 32,
+          "pattern": "^[a-zA-Z0-9_\\.\\- ]+$"
+        },
+        "gameUid": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 40,
+          "pattern": "^[a-zA-Z0-9_\\-#]+$"
+        },
+        "region": {
+          "type": "string",
+          "enum": ["IN", "SEA", "MENA", "EU", "NA", "GLOBAL"]
+        },
+        "favoriteGame": {
+          "type": "string",
+          "enum": ["BGMI", "Free Fire", "Valorant", "COD Mobile", "Apex Legends"]
+        },
+        "rating": {
+          "type": "number",
+          "description": "Competitive ELO rating points"
+        },
+        "wins": {
+          "type": "number",
+          "description": "Total solo tournament and match wins"
+        },
+        "eliminations": {
+          "type": "number",
+          "description": "Total confirmed eliminations"
+        },
+        "matchesPlayed": {
+          "type": "number",
+          "description": "Total completed matches"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "uid",
+        "ign",
+        "gameUid",
+        "region",
+        "favoriteGame",
+        "rating",
+        "wins",
+        "eliminations",
+        "matchesPlayed",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "UserPrivateInfo": {
+      "title": "UserPrivateInfo",
+      "description": "Isolated PII record for a registered player.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120
+        },
+        "discordHandle": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 50
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "email", "discordHandle", "updatedAt"]
+    },
+    "AdminMarker": {
+      "title": "AdminMarker",
+      "description": "Trusted admin role assignment document.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "role", "createdAt"]
+    },
+    "Tournament": {
+      "title": "Tournament",
+      "description": "Solo esports tournament event metadata and configuration.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 80
+        },
+        "game": {
+          "type": "string",
+          "enum": ["BGMI", "Free Fire", "Valorant", "COD Mobile", "Apex Legends"]
+        },
+        "format": {
+          "type": "string",
+          "enum": ["br_solo", "1v1_bracket"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["registration", "live", "completed", "cancelled"]
+        },
+        "prizePool": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string",
+          "enum": ["INR", "USD"]
+        },
+        "entryFee": {
+          "type": "number"
+        },
+        "maxPlayers": {
+          "type": "number"
+        },
+        "registeredCount": {
+          "type": "number"
+        },
+        "startTime": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 40
+        },
+        "region": {
+          "type": "string",
+          "enum": ["IN", "SEA", "MENA", "EU", "NA", "GLOBAL"]
+        },
+        "rulesSummary": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 1200
+        },
+        "bannerKey": {
+          "type": "string",
+          "enum": ["br_showdown", "duel_arena", "vynorix_arena"]
+        },
+        "organizerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "organizerName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 48
+        },
+        "winnerIgn": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 32
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "game",
+        "format",
+        "status",
+        "prizePool",
+        "currency",
+        "entryFee",
+        "maxPlayers",
+        "registeredCount",
+        "startTime",
+        "region",
+        "rulesSummary",
+        "bannerKey",
+        "organizerId",
+        "organizerName",
+        "winnerIgn",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "TournamentLobby": {
+      "title": "TournamentLobby",
+      "description": "Private lobby room ID and password accessible only to registered participants and organizers.",
+      "type": "object",
+      "properties": {
+        "tournamentId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "roomId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "roomPass": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "serverRegion": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 40
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 300
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["tournamentId", "roomId", "roomPass", "serverRegion", "notes", "updatedAt"]
+    },
+    "TournamentRegistration": {
+      "title": "TournamentRegistration",
+      "description": "Solo player registration and match standing inside a tournament.",
+      "type": "object",
+      "properties": {
+        "tournamentId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "ign": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 32,
+          "pattern": "^[a-zA-Z0-9_\\.\\- ]+$"
+        },
+        "gameUid": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 40,
+          "pattern": "^[a-zA-Z0-9_\\-#]+$"
+        },
+        "seed": {
+          "type": "number"
+        },
+        "checkedIn": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["registered", "checked_in", "eliminated", "winner"]
+        },
+        "kills": {
+          "type": "number"
+        },
+        "placement": {
+          "type": "number"
+        },
+        "points": {
+          "type": "number"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "tournamentId",
+        "userId",
+        "ign",
+        "gameUid",
+        "seed",
+        "checkedIn",
+        "status",
+        "kills",
+        "placement",
+        "points",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "TournamentMatch": {
+      "title": "TournamentMatch",
+      "description": "1v1 duel bracket match pairing and scoreline.",
+      "type": "object",
+      "properties": {
+        "tournamentId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "matchId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "round": {
+          "type": "number"
+        },
+        "matchNumber": {
+          "type": "number"
+        },
+        "player1Id": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 128
+        },
+        "player1Ign": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 32
+        },
+        "player1Score": {
+          "type": "number"
+        },
+        "player2Id": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 128
+        },
+        "player2Ign": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 32
+        },
+        "player2Score": {
+          "type": "number"
+        },
+        "winnerId": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 128
+        },
+        "winnerIgn": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 32
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "live", "completed"]
+        },
+        "scheduledAt": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 40
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "tournamentId",
+        "matchId",
+        "round",
+        "matchNumber",
+        "player1Id",
+        "player1Ign",
+        "player1Score",
+        "player2Id",
+        "player2Ign",
+        "player2Score",
+        "winnerId",
+        "winnerIgn",
+        "status",
+        "scheduledAt",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Public competitive player profiles and solo leaderboard stats."
+    },
+    "/users/{userId}/private/info": {
+      "schema": { "$ref": "#/entities/UserPrivateInfo" },
+      "description": "Isolated PII document for each user."
+    },
+    "/admins/{userId}": {
+      "schema": { "$ref": "#/entities/AdminMarker" },
+      "description": "Trusted organizer/admin markers."
+    },
+    "/tournaments/{tournamentId}": {
+      "schema": { "$ref": "#/entities/Tournament" },
+      "description": "Solo esports tournament events."
+    },
+    "/tournaments/{tournamentId}/lobby/credentials": {
+      "schema": { "$ref": "#/entities/TournamentLobby" },
+      "description": "Private lobby credentials visible only to registered participants and admins."
+    },
+    "/tournaments/{tournamentId}/registrations/{userId}": {
+      "schema": { "$ref": "#/entities/TournamentRegistration" },
+      "description": "Solo player entries and standings for a tournament."
+    },
+    "/tournaments/{tournamentId}/matches/{matchId}": {
+      "schema": { "$ref": "#/entities/TournamentMatch" },
+      "description": "Bracket pairings and live match scorelines."
+    }
+  }
+}

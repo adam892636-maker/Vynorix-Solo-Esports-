@@ -1,0 +1,8 @@
+{
+  "name": "Vynorix Solo Esports",
+  "description": "Competitive solo esports tournament platform with live 1v1 brackets, battle royale standings, player profiles, and organizer controls.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
